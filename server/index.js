@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/api.json');
 
 // Middlewares
