@@ -9,14 +9,13 @@ const Account = require("../models/Account");
 // Import validation
 const { registerValidation } = require('./validations/validations');
 
-
 // CREATE AN USER -> path: /users
 router.post("/", async (req, res) => {
 
   // Validate data before creating an user
   const {error} = registerValidation(req.body);
   if (error) {
-    return res.status(400).send(error.details[0].message);
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   // Check if the user is already in the database.
@@ -24,7 +23,7 @@ router.post("/", async (req, res) => {
     'email': req.body.email
   });
   if (emailExists) {
-    return res.status(409).send("Email already in use!");
+    return res.status(409).json({ error: "Email already in use!" });
   }
 
   // Hash the password
