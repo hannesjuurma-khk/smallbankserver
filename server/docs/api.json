@@ -1,0 +1,189 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Hannes Juurma's SmallBank API",
+        "version": "1.0.0",
+        "description": "This is the SmallBank API Documentation",
+        "contact": {
+            "email": "hannes.juurma@khk.ee"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9000/",
+            "description": "Local development server"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "summary": "User related operations",
+            "description": "",
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/postUsersRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "users"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/postUsersResponse"
+                                }
+                            }
+                        },
+                        "description": "Response in case of register is successful"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        },
+                        "description": "Response in case of errors"
+                    },
+                    "409": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        },
+                        "description": "Email already exists"
+                    }
+                },
+                "summary": "Register a new user to the bank"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "postUsersRequest": {
+                "description": "Response body when making POST /users request",
+                "required": [
+                    "firstname",
+                    "lastname",
+                    "password",
+                    "email"
+                ],
+                "type": "object",
+                "properties": {
+                    "firstname": {
+                        "description": "First name of the user's owner",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "description": "Last name of the user's owner",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Password used for logging into the bank",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email used for logging into the bank",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "firstname": "John",
+                    "lastname": "Doe",
+                    "password": "Johnnyboy123",
+                    "email": "johndoe@example.com"
+                }
+            },
+            "errorResponse": {
+                "title": "Root Type for errorResponse",
+                "description": "Response body for errors",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "description": "Error description\n",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            },
+            "postUsersResponse": {
+                "title": "Root Type for postUsersResponse",
+                "description": "Response in case of successful register",
+                "required": [],
+                "type": "object",
+                "properties": {
+                    "registerDate": {
+                        "description": "Date of account creation"
+                    },
+                    "firstname": {
+                        "description": "Account owner's first name"
+                    },
+                    "lastname": {
+                        "description": "Account owner's last name"
+                    },
+                    "password": {
+                        "description": "Password for logging into the user's account"
+                    },
+                    "email": {
+                        "description": "Email for logging into the user's bank\n"
+                    },
+                    "balance": {
+                        "description": "Account's balance"
+                    },
+                    "user": {
+                        "description": "User's id, who the bank belongs to"
+                    },
+                    "bankPrefix": {
+                        "description": "Small Bank API bank's prefix"
+                    },
+                    "accountNumber": {
+                        "description": "Account number for the user's account"
+                    },
+                    "newUser_id": {
+                        "description": "A unique ID identifying the user\n\n"
+                    },
+                    "newAccount_id": {
+                        "description": "A unique ID identifying the account\n\n"
+                    }
+                },
+                "example": {
+                    "newUser": {
+                        "registerDate": "2020-09-25T08:13:10.056Z",
+                        "_id": "5f6dabe0e836b1744f316f19",
+                        "firstname": "John",
+                        "lastname": "Doe",
+                        "password": "$2a$10$JcjhJoz.71dT/b5/NFNBi.QaNeHJkNy6ju7vFtinQg/sx5s7Zgf9S",
+                        "email": "johndoe@example.com",
+                        "__v": 0
+                    },
+                    "newAccount": {
+                        "balance": 0,
+                        "_id": "5f6dabe0e836b1744f316f1a",
+                        "user": "5f6dabe0e836b1744f316f19",
+                        "bankPrefix": "SBA",
+                        "accountnumber": "uU7GedvmEwk8",
+                        "__v": 0
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "users",
+            "description": "User related operations"
+        }
+    ]
+}
