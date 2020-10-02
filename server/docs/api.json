@@ -137,6 +137,14 @@
                 },
                 "summary": "Create a new user session with existing account"
             }
+        },
+        "/balance": {
+            "get": {
+                "tags": [
+                    "balance"
+                ],
+                "summary": "Get user balance"
+            }
         }
     },
     "components": {
@@ -288,6 +296,10 @@
         {
             "name": "sessions",
             "description": "Sessions related operations\n"
+        },
+        {
+            "name": "balance",
+            "description": "User's balance\n"
         }
     ]
 }
