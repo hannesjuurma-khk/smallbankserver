@@ -3,13 +3,15 @@ const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/api.json');
 
 // Middlewares
 // Take requests in as JSON and handle them as JSON.
 app.use(express.json());
-
+// Enable cookie parsing everywhere
+app.use(cookieParser());
 // Enable cors
 app.use(cors());
 
@@ -18,6 +20,7 @@ const routes = require('./routes')
 
 // When ... path is hit, use ...Router
 app.use("/users", routes.usersRouter);
+app.use("/sessions", routes.sessionsRouter);
 
 // Docs
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
