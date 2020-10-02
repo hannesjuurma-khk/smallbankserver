@@ -21,6 +21,7 @@ const routes = require('./routes')
 // When ... path is hit, use ...Router
 app.use("/users", routes.usersRouter);
 app.use("/sessions", routes.sessionsRouter);
+app.use("/balance", routes.balanceRouter);
 
 // Docs
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
