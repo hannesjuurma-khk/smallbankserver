@@ -139,12 +139,91 @@
             }
         },
         "/balance": {
+            "summary": "Get user's balance",
             "get": {
                 "tags": [
                     "balance"
                 ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getBalanceResponse"
+                                }
+                            }
+                        },
+                        "description": "Successful balance call"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        },
+                        "description": "User's not logged in"
+                    }
+                },
                 "summary": "Get user balance"
-            }
+            },
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "description": "User's session token",
+                    "schema": {},
+                    "in": "cookie",
+                    "required": true
+                }
+            ]
+        },
+        "/deposit/:amount": {
+            "summary": "Deposit money as an user",
+            "post": {
+                "tags": [
+                    "deposit"
+                ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "description": "User's session token",
+                        "schema": {},
+                        "in": "cookie",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/postDepositResponse"
+                                }
+                            }
+                        },
+                        "description": "Deposit successful"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        },
+                        "description": "Deposit fails"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "authorization",
+                    "description": "User's session token",
+                    "schema": {},
+                    "in": "cookie"
+                }
+            ]
         }
     },
     "components": {
@@ -285,6 +364,20 @@
                 "example": {
                     "message": "You have successfully logged in!"
                 }
+            },
+            "getBalanceResponse": {
+                "description": "User's balance",
+                "type": "object",
+                "example": {
+                    "Your balance": "9000 euro"
+                }
+            },
+            "postDepositResponse": {
+                "description": "Response for successful deposit",
+                "type": "object",
+                "example": {
+                    "You successfully deposited ": "... euro"
+                }
             }
         }
     },
@@ -300,6 +393,10 @@
         {
             "name": "balance",
             "description": "User's balance\n"
+        },
+        {
+            "name": "deposit",
+            "description": "Deposit money to account\n"
         }
     ]
 }
