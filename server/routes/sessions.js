@@ -54,8 +54,7 @@ router.post('/', async (req, res) => {
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-    path: '/',
-    domain: '/',
+    path: '/'
   });
   res.status(200).json({"message": 'You have successfully logged in!'})
 });
