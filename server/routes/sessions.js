@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
     sameSite: 'none',
     secure: true,
     path: '/',
-    domain: 'http://localhost:3000/',
+    domain: '/',
   });
   res.status(200).json({"message": 'You have successfully logged in!'})
 });
