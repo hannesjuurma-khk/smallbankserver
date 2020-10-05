@@ -53,7 +53,9 @@ router.post('/', async (req, res) => {
   res.cookie('authorization', token, {
     httpOnly: true,
     sameSite: 'none',
-    secure: true
+    secure: true,
+    path: '/',
+    domain: 'http://localhost:3000/',
   });
   res.status(200).json({"message": 'You have successfully logged in!'})
 });
