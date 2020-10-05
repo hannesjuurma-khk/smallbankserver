@@ -214,7 +214,8 @@
                         },
                         "description": "Deposit fails"
                     }
-                }
+                },
+                "summary": "Deposit money to user's account"
             },
             "parameters": [
                 {
@@ -224,6 +225,56 @@
                     "in": "cookie"
                 }
             ]
+        },
+        "/withdraw/:amount": {
+            "summary": "Withdraw money as an user",
+            "post": {
+                "tags": [
+                    "withdraw"
+                ],
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "description": "User's session token",
+                        "schema": {},
+                        "in": "cookie",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/postWithdrawResponse"
+                                }
+                            }
+                        },
+                        "description": "Successful withdraw\n"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        },
+                        "description": "Withdraw failed"
+                    },
+                    "409": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/errorResponse"
+                                }
+                            }
+                        },
+                        "description": "Insufficent funds"
+                    }
+                },
+                "summary": "Withdraw money from user's account"
+            }
         }
     },
     "components": {
@@ -378,6 +429,13 @@
                 "example": {
                     "You successfully deposited ": "... euro"
                 }
+            },
+            "postWithdrawResponse": {
+                "description": "Response in case of a successful withdraw",
+                "type": "object",
+                "example": {
+                    "You successfully withdrew ": "... euro"
+                }
             }
         }
     },
@@ -397,6 +455,10 @@
         {
             "name": "deposit",
             "description": "Deposit money to account\n"
+        },
+        {
+            "name": "withdraw",
+            "description": "Withdraw money from account\n"
         }
     ]
 }

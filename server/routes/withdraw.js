@@ -11,7 +11,7 @@ router.post('/:amount', verifyUser, async (req, res) => {
     const withdrawingAccount = await Account.findOne({ 'user': req.user._id }).select('balance');
 
     // Don't allow withdrawing, when the user doesn't have enough money.
-    if (withdrawingAccount.balance < req.params.amount) return res.status(400).send('You do not have enough money to withdraw that much!')
+    if (withdrawingAccount.balance < req.params.amount) return res.status(409).json({"error": "Insufficent funds!"})
 
     // If user has enough money, go through with the deal.
     const updateBalance = await Account.updateOne(
@@ -22,9 +22,9 @@ router.post('/:amount', verifyUser, async (req, res) => {
         }
       }
     );
-    res.json("You successfully withdrew " + req.params.amount + "€.");
+    res.status(200).json({"You successfully withdrew ":  req.params.amount + "euro"});
   } catch(err) {
-    res.status(400).send('Could not withdraw money!');
+    res.status(400).json({"error" : "Could not withdraw money!"});
   }
 })
 
