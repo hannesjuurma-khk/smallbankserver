@@ -22,7 +22,9 @@ const routes = require('./routes')
 app.use("/users", routes.usersRouter);
 app.use("/sessions", routes.sessionsRouter);
 app.use("/deposit", routes.depositRouter);
+app.use("/withdraw", routes.withdrawRouter);
 app.use("/balance", routes.balanceRouter);
+
 // Docs
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
