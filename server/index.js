@@ -24,7 +24,7 @@ app.use("/sessions", routes.sessionsRouter);
 app.use("/deposit", routes.depositRouter);
 app.use("/withdraw", routes.withdrawRouter);
 app.use("/balance", routes.balanceRouter);
-
+app.use("/logout", routes.logoutRouter);
 // Docs
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

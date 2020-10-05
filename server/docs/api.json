@@ -275,6 +275,26 @@
                 },
                 "summary": "Withdraw money from user's account"
             }
+        },
+        "/logout": {
+            "summary": "Log user out of the account",
+            "post": {
+                "tags": [
+                    "logout"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/postLogoutResponse"
+                                }
+                            }
+                        },
+                        "description": "Successful log out"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -436,6 +456,11 @@
                 "example": {
                     "You successfully withdrew ": "... euro"
                 }
+            },
+            "postLogoutResponse": {
+                "description": "Successful log out",
+                "type": "object",
+                "example": "You have logged out!"
             }
         }
     },
@@ -459,6 +484,10 @@
         {
             "name": "withdraw",
             "description": "Withdraw money from account\n"
+        },
+        {
+            "name": "logout",
+            "description": "Log out of the user's account\n"
         }
     ]
 }
