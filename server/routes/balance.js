@@ -9,9 +9,10 @@ router.get('/', verifyUser, async (req, res) => {
   try {
     // Find the account of the logged in user (id stored in req.user).
     const balanceAccount = await Account.findOne({ 'user': req.user._id }).select('balance');
+    const balanceUser = await Account.findOne({ '_id': req.user._id }).select('firstname');
 
     res.status(200).json({
-      "firstname": req.user.firstname,
+      "firstname": balanceUser.firstname,
       "balance": balanceAccount.balance
     })
    } catch(err) {
