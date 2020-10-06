@@ -53,10 +53,8 @@ router.post('/', async (req, res) => {
   res.cookie('authorization', token, {
     httpOnly: true,
     sameSite: 'none',
-    secure: true,
-    path: '/'
+    secure: true
   });
-  localStorage.setItem('authorization', token);
   res.status(200).json({"message": 'You have successfully logged in!'})
 });
 
