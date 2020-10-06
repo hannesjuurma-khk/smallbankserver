@@ -9,7 +9,7 @@ router.get('/', verifyUser, async (req, res) => {
   try {
     // Find the account of the logged in user (id stored in req.user).
     const balanceAccount = await Account.findOne({ 'user': req.user._id }).select('balance');
-
+    console.log(req.user);
     res.status(200).send(balanceAccount.balance + ' €')
    } catch(err) {
     res.status(401).json( {"error": "Unauthorized action. Log in to do that." });
